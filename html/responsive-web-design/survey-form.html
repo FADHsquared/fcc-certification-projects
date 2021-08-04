@@ -4,27 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Form</title>
+    <style>
+        :root {
+            font-family: sans-serif;
+        }
+        *, *::before, *::after {
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #ff7700;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23cc0000' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23aa0000' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23d6002b' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b10022' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d9004b' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23b2003d' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d3006c' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23ac0057' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23c4008c' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%239e0071' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        main {
+            height: 100vh;
+            display: grid;
+            justify-items: center;
+            align-content:center;
+        }
+        form {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: darkslateblue;
+            color: white;
+        }
+        form > * {
+            display: block;
+        }
+        label {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
 </head>
 <body>
 <main>
-    <h1 id="title"></h1>
-    <p id="desription"></p>
-    <form action="" class="post" id="survey-form">
-        <label for="name-label">
-            Your Name
-            <input type="text" name="name" id="name-label" required>
-        </label>
-        <label for="email-label">
-            Email
-            <input type="email" name="email" id="email-label" required>
-        </label>
-        <label for="number-label">
-            Number
-            <input type="number" name="number" id="number-label" min="" max="">
-        </label>
+    <h1 id="title">Development Environment Satisfaction Survey</h1>
+    <p id="description">Thank you for taking the time to complete this survey.</p>
+    <form action="" method="post" id="survey-form">
+        <label for="name-label">Name</label>
+        <input type="text" name="name" id="name-label" required>
+        <label for="email-label">Email</label>
+        <input type="email" name="email" id="email-label" required>
+        <label for="number-label">Number</label>
+        <input type="number" name="number" id="number-label" min="" max="">
         <select name="" id="dropdown">
-            <option value=""></option>
+            <option value="">Option</option>
         </select>
+        <label for="">
+            <input type="radio" name="radio-name" id="">
+            s
+        </label>
+        <label for="">
+            <input type="radio" name="radio-name" id="">
+            a
+        </label>
+        <label for="label-vscode">
+            <input type="checkbox" name="checkbox-name" id="label-vscode">
+            Visual Studio Code
+        </label>
+        <label for="label-sublime">
+            <input type="checkbox" name="checkbox-name" id="label-sublime">
+            Sublime Text
+        </label>
+        <label for="label-atom">
+            <input type="checkbox" name="checkbox-name" id="label-atom">
+            Atom
+        </label>
+        <label for="label-brackets">
+            <input type="checkbox" name="checkbox-name" id="label-brackets">
+            Brackets
+        </label>
+        <label for="label-notepadplusplus">
+            <input type="checkbox" name="checkbox-name" id="label-notepadplusplus">
+            Notepad++
+        </label>
+        <label for="label-vim">
+            <input type="checkbox" name="checkbox-name" id="label-vim">
+            Vim
+        </label>
+        <label for="label-emacs">
+            <input type="checkbox" name="checkbox-name" id="label-emacs">
+            Emacs
+        </label>
+        <label for="label-jetbrains">
+            <input type="checkbox" name="checkbox-name" id="label-jetbrains">
+            Any JetBrains IDE (IntelliJ IDEA, PyCharm, WebStorm, etc.)
+        </label>
+        <label for="label-eclipse">
+            <input type="checkbox" name="checkbox-name" id="label-eclipse">
+            Eclipse
+        </label>
+        <label for="label-vs">
+            <input type="checkbox" name="checkbox-name" id="label-vs">
+            Visual Studio
+        </label>
+        <label for="label-codeblocks">
+            <input type="checkbox" name="checkbox-name" id="label-codeblocks">
+            Code::Blocks
+        </label>
+        <label for="label-android-studio">
+            <input type="checkbox" name="checkbox-name" id="label-android-studio">
+            Android Studio
+        </label>
+        <label for="label-xcode">
+            <input type="checkbox" name="checkbox-name" id="label-xcode">
+            Xcode
+        </label>
+        <textarea name="comments" id="" cols="30" rows="10"></textarea>
+        <button type="submit">Submit</button>
     </form>
 </main>
 </body>
