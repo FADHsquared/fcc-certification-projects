@@ -23,3 +23,18 @@ function destroyer(arr, ...numsToRemove) {
 }
 
 // Wherefore art thou
+function whatIsInAName(collection, source) {
+  const sourceKeys = Object.keys(source)
+  return collection.filter((collectionObject) => sourceKeys.every((key) => source[key] === collectionObject[key]))
+}
+
+// Spinal Tap Case
+function spinalCase(str) {
+  const splittedString = str.replace(/\s|_/g, '-').split('')
+  for (let i = 1; i < splittedString.length; i++) {
+    if (/[a-z]{1}[A-Z]/.test(splittedString[i - 1] + splittedString[i])) {
+      splittedString.splice(i, 0, '-')
+    }
+  }
+  return splittedString.join('').toLowerCase()
+}
