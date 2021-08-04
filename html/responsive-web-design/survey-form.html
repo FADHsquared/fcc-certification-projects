@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Form</title>
     <style>
-        :root {
-            font-family: sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+        :root, input, select, button  {
+            font-family: 'Nunito', sans-serif;
         }
         *, *::before, *::after {
             margin: 0;
@@ -22,13 +23,34 @@
             height: 100vh;
             display: grid;
             justify-items: center;
-            align-content:center;
+            align-content: center;
+        }
+        .form-header {
+            margin: 0.5rem;
+            text-align: center;
+            color: black;
+        }
+        @media (max-width: 320px) {
+            .form-header h1 {
+                font-size: 1.375em;
+            }
+        }
+        @media (min-width: 321px) and (max-width: 415px) {
+            .form-header h1 {
+                font-size: 1.625em;
+            }
         }
         form {
+            max-width: 32rem;
+            margin: 0 0.5rem 0.5rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
             background: darkslateblue;
             color: white;
+            overflow-y: auto;
+        }
+        form * {
+            margin-bottom: 0.1rem;
         }
         form > * {
             display: block;
@@ -37,84 +59,243 @@
             -webkit-user-select: none;
             user-select: none;
         }
+        input[type="text"], input[type="email"], input[type="number"], select, textarea {
+            width: 100%;
+            height: 1.5rem;
+            border: 2px solid darkblue;
+            border-radius: 0.25rem;
+            background: midnightblue;
+            color: white;
+        }
+        .input-group, select {
+            margin-bottom: 0.5rem;
+        }
+        .input-group > * {
+            display: block;
+        }
+        .group-divider {
+            display: flex;
+            column-gap: 1rem;
+        }
+        .group-divider > .group > * {
+            display: block;
+        }
+        textarea {
+            height: 4rem;
+            resize: none;
+        }
+        #submit {
+            height: 1.5rem;
+            width: 100%;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
 <main>
-    <h1 id="title">Development Environment Satisfaction Survey</h1>
-    <p id="description">Thank you for taking the time to complete this survey.</p>
-    <form action="" method="post" id="survey-form">
-        <label for="name-label">Name</label>
-        <input type="text" name="name" id="name-label" required>
-        <label for="email-label">Email</label>
-        <input type="email" name="email" id="email-label" required>
-        <label for="number-label">Number</label>
-        <input type="number" name="number" id="number-label" min="" max="">
-        <select name="" id="dropdown">
-            <option value="">Option</option>
+    <div class="form-header">
+        <h1 id="title">Development Environment Satisfaction Survey</h1>
+        <p id="description">Thank you for taking the time to fill this in.</p>
+    </div>
+    <form id="survey-form" action="" method="post">
+        <div class="input-group">
+            <label id="name-label" for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="input-group">
+            <label id="email-label" for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+            <label id="number-label" for="number">Age (optional)</label>
+            <input id="number" type="number" name="age" min="0" max="127" placeholder="Enter your age">
+        </div>
+        <select id="dropdown" name="dev-environment-choice-primary" required>
+            <option value="" disabled selected hidden>Select your primary development environment</option>
+            <optgroup label="Code Editor">
+                <option value="Visual Studio Code">Visual Studio Code</option>
+                <option value="Sublime Text">Sublime Text</option>
+                <option value="Atom">Atom</option>
+                <option value="Brackets">Brackets</option>
+                <option value="Notepad++">Notepad++</option>
+                <option value="Vim">Vim</option>
+                <option value="Emacs">Emacs</option>
+            </optgroup>
+            <optgroup label="IDE">
+                <option value="Eclipse">Eclipse</option>
+                <option value="Visual Studio">Visual Studio</option>
+                <option value="Code::Blocks">Code::Blocks</option>
+                <option value="Android Studio">Android Studio</option>
+                <option value="Xcode">Xcode</option>
+            </optgroup>
+            <optgroup label="JetBrains IDE">
+                <option value="IntelliJ IDEA">IntelliJ IDEA</option>
+                <option value="CLion">CLion</option>
+                <option value="DataGrip">DataGrip</option>
+                <option value="DataSpell">DataSpell</option>
+                <option value="GoLand">GoLand</option>
+                <option value="PhpStorm">PhpStorm</option>
+                <option value="PyCharm">PyCharm</option>
+                <option value="Rider">Rider</option>
+                <option value="RubyMine">RubyMine</option>
+                <option value="WebStorm">WebStorm</option>
+            </optgroup>
         </select>
-        <label for="">
-            <input type="radio" name="radio-name" id="">
-            s
-        </label>
-        <label for="">
-            <input type="radio" name="radio-name" id="">
-            a
-        </label>
-        <label for="label-vscode">
-            <input type="checkbox" name="checkbox-name" id="label-vscode">
-            Visual Studio Code
-        </label>
-        <label for="label-sublime">
-            <input type="checkbox" name="checkbox-name" id="label-sublime">
-            Sublime Text
-        </label>
-        <label for="label-atom">
-            <input type="checkbox" name="checkbox-name" id="label-atom">
-            Atom
-        </label>
-        <label for="label-brackets">
-            <input type="checkbox" name="checkbox-name" id="label-brackets">
-            Brackets
-        </label>
-        <label for="label-notepadplusplus">
-            <input type="checkbox" name="checkbox-name" id="label-notepadplusplus">
-            Notepad++
-        </label>
-        <label for="label-vim">
-            <input type="checkbox" name="checkbox-name" id="label-vim">
-            Vim
-        </label>
-        <label for="label-emacs">
-            <input type="checkbox" name="checkbox-name" id="label-emacs">
-            Emacs
-        </label>
-        <label for="label-jetbrains">
-            <input type="checkbox" name="checkbox-name" id="label-jetbrains">
-            Any JetBrains IDE (IntelliJ IDEA, PyCharm, WebStorm, etc.)
-        </label>
-        <label for="label-eclipse">
-            <input type="checkbox" name="checkbox-name" id="label-eclipse">
-            Eclipse
-        </label>
-        <label for="label-vs">
-            <input type="checkbox" name="checkbox-name" id="label-vs">
-            Visual Studio
-        </label>
-        <label for="label-codeblocks">
-            <input type="checkbox" name="checkbox-name" id="label-codeblocks">
-            Code::Blocks
-        </label>
-        <label for="label-android-studio">
-            <input type="checkbox" name="checkbox-name" id="label-android-studio">
-            Android Studio
-        </label>
-        <label for="label-xcode">
-            <input type="checkbox" name="checkbox-name" id="label-xcode">
-            Xcode
-        </label>
-        <textarea name="comments" id="" cols="30" rows="10"></textarea>
-        <button type="submit">Submit</button>
+        <select id="dropdown-secondary" name="dev-environment-choice-secondary" >
+            <option value="" disabled selected hidden>Select your secondary development environment, if any</option>
+            <optgroup label="Code Editor">
+                <option value="Visual Studio Code">Visual Studio Code</option>
+                <option value="Sublime Text">Sublime Text</option>
+                <option value="Atom">Atom</option>
+                <option value="Brackets">Brackets</option>
+                <option value="Notepad++">Notepad++</option>
+                <option value="Vim">Vim</option>
+                <option value="Emacs">Emacs</option>
+            </optgroup>
+            <optgroup label="IDE">
+                <option value="Eclipse">Eclipse</option>
+                <option value="Visual Studio">Visual Studio</option>
+                <option value="Code::Blocks">Code::Blocks</option>
+                <option value="Android Studio">Android Studio</option>
+                <option value="Xcode">Xcode</option>
+            </optgroup>
+            <optgroup label="JetBrains IDE">
+                <option value="IntelliJ IDEA">IntelliJ IDEA</option>
+                <option value="CLion">CLion</option>
+                <option value="DataGrip">DataGrip</option>
+                <option value="DataSpell">DataSpell</option>
+                <option value="GoLand">GoLand</option>
+                <option value="PhpStorm">PhpStorm</option>
+                <option value="PyCharm">PyCharm</option>
+                <option value="Rider">Rider</option>
+                <option value="RubyMine">RubyMine</option>
+                <option value="WebStorm">WebStorm</option>
+            </optgroup>
+        </select>
+        <div class="input-group">
+            <p>Select one word from each row, which of these descriptions regarding a code editor resonate with you the most?</p>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="editor-description-1" value="Simple">
+                    Simple
+                </label>
+                <label>
+                    <input type="radio" name="editor-description-1" value="Featureless">
+                    Featureless
+                </label>
+            </div>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="editor-description-2" value="Lightweight">
+                    Lightweight
+                </label>
+                <label>
+                    <input type="radio" name="editor-description-2" value="Hard to set up">
+                    Hard to set up
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <p>Select one word from each row, which of these descriptions regarding an IDE resonate with you the most?</p>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="ide-description-1" value="Convenient">
+                    Convenient
+                </label>
+                <label>
+                    <input type="radio" name="ide-description-1" value="Complex">
+                    Complex
+                </label>
+            </div>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="ide-description-2" value="Full-featured">
+                    Full-featured
+                </label>
+                <label>
+                    <input type="radio" name="ide-description-2" value="Bloated">
+                    Bloated
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <p>Select development environments you have tried</p>
+            <div class="group-divider">
+                <div class="group">
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Visual Studio Code">
+                        Visual Studio Code
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Sublime Text">
+                        Sublime Text
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Atom">
+                        Atom
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Brackets">
+                        Brackets
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Notepad++">
+                        Notepad++
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Vim">
+                        Vim
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-editor" value="Emacs">
+                        Emacs
+                    </label>
+                </div>
+                <div class="group">
+                    <label>
+                        <input type="checkbox" name="try-ide" value="IntelliJ IDEA">
+                        IntelliJ IDEA
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Other JetBrains IDEs">
+                        Other JetBrains IDEs
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Eclipse">
+                        Eclipse
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Visual Studio">
+                        Visual Studio
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Code::Blocks">
+                        Code::Blocks
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Android Studio">
+                        Android Studio
+                    </label>
+                    <label>
+                        <input type="checkbox" name="try-ide" value="Xcode">
+                        Xcode
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="textarea-reason-choice-general">Specify why you generally choose to use a code editor/IDE as your primary development environment</label>
+            <textarea id="textarea-reason-choice-general" name="reason-choice-general"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="textarea-reason-choice-specific">Specify why you chose your specific code editor/IDE as your primary development environment</label>
+            <textarea id="textarea-reason-choice-specific" name="reason-choice-specific"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="textarea-reason-choice-secondary">Specify why you chose your specific code editor/IDE as your secondary development environment</label>
+            <textarea id="textarea-reason-choice-secondary" name="reason-choice-secondary"></textarea>
+        </div>
+        <button id="submit" type="submit">Submit</button>
     </form>
 </main>
 </body>
