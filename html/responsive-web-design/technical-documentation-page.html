@@ -5,45 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technical Documentation Page</title>
     <style>
-        @media (min-width: 768px) {
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 
+        :root, input, select, button  {
+            font-family: 'Nunito', sans-serif;
+        }
+        *, *::before, *::after {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: floralwhite;
+            display: grid;
+        }
+
+        nav {
+            background: palegoldenrod;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        nav header {
+            font-size: 1.125em;
+            font-weight: bold;
+        }
+        main {
+            margin: 0.25rem 0.5rem;
+        }
+
+        @media (min-width: 512px) {
+            body {
+                grid-template-columns: auto 1fr;
+            }
+            nav {
+                position: fixed;
+                height: 100vh;
+                display: grid;
+                justify-items: start;
+                align-content: start;
+            }
+            main {
+                margin-left: 12.75rem;
+            }
+        }
+
+        .main-section header {
+            margin: 0.35rem 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .main-section p {
+            margin: 0.35rem 0;
+        }
+        code {
+            background: antiquewhite;
+            padding: 0.2rem;
+            box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+            font-family: 'Inconsolata', monospace;
+        }
+        kbd {
+            font-family: 'Inconsolata', monospace;
         }
     </style>
 </head>
 <body>
 <nav id="navbar">
-    <header></header>
-    <a href="" class="nav-link"></a>
-    <a href="" class="nav-link"></a>
-    <a href="" class="nav-link"></a>
-    <a href="" class="nav-link"></a>
-    <a href="" class="nav-link"></a>
+    <header>Python for Beginners</header>
+    <a href="#Introduction" class="nav-link">Introduction</a>
+    <a href="#Installing_Python" class="nav-link">Installing Python</a>
+    <a href="#Hello_World" class="nav-link">Hello World</a>
+    <a href="#Variables" class="nav-link">Variables</a>
+    <a href="#Lorem" class="nav-link">Lorem</a>
 </nav>
 <main id="main-doc">
-    <section id="" class="main-section">
-        <header></header>
-        <p></p>
-        <code></code>
+    <section id="Introduction" class="main-section">
+        <header>Introduction</header>
+        <p>
+            Python is a high-level general-purpose programming language.
+            Wait. What are those technical jargon I can't understand!? Let's break it down word by word.
+        </p>
+        <ul>
+            <li>
+                High-level
+                <p>This means you don't need to worry about small details about computer and can just get started.</p>
+            </li>
+            <li>
+                General-purpose
+                <p>
+                    This means you can use Python for just about... anything. From web development, app development,
+                    scientific case studies to everything else. Here are just a few examples.
+                </p>
+                <ul>
+                    <li>
+                        Web development: creating back-end web servers to serve data and real-time communication (like
+                        chatting) to users. You can use <code>django</code>, <code>flask</code> and others.
+                    </li>
+                    <li>
+                        GUI development: creating performant cross-platform desktop apps with slick user interfaces. You
+                        can use <code>tkinter</code>, <code>pyQt</code> and others.
+                    </li>
+                    <li>
+                        Scientific and Numeric Purposes: Writing scripts that aid in your scientific projects. You can
+                        use <code>SciPy</code>, <code>Pandas</code> and others.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>
+            So let's give you a TLDR. Python is an easy-to-learn programming language for beginners, and is extensible
+            to create pretty much everything as you go along your programming journey.
+        </p>
+        <p>Let's get started with installation.</p>
     </section>
-    <section id="" class="main-section">
-        <header></header>
-        <p></p>
-        <code></code>
+    <section id="Installing_Python" class="main-section">
+        <header>Installing Python</header>
+        <p>
+            You can install Python using either the official installer or a Python version manager. I much prefer using
+            a Python version manager because the official installer does not have an auto-updater, which means if you
+            want to update it you will have to either overwrite the old installation, or install it in a different
+            directory and manually set up your computer to use the new Python installation by default - this is
+            laborious and confusing for beginners. So below are instructions for both methods, but I highly recommend
+            using a Python version manager.
+        </p>
     </section>
-    <section id="" class="main-section">
-        <header></header>
-        <p></p>
-        <code></code>
+    <section id="Hello_World" class="main-section">
+        <header>Hello World</header>
+        <p>
+            The tradition for learners picking up a new programming language is to make a very simple script/app that
+            shows a text 'Hello World' to the screen. Let's do that now.
+        </p>
+        <p>
+            Open your terminal of choice (e.g. Command Prompt, zsh), then type <code>python</code> and hit
+            <kbd>Enter</kbd> to launch the Python REPL - essentially a way to play around with Python without having to
+            write an actual script.
+        </p>
+        <p>Your screen should look something like this:</p>
+        <code>
+            Python 3.x.x (tags/v3.x.x:xxxxxx, mmm dd yyyy, hh:mm:ss [MSC v.xxxx 64 bit (AMD64)] on os<br />
+            Type "help", "copyright", "credits" or "license" for more information.<br />
+            >>>
+        </code>
+        <p>You can now write some code and execute it by hitting <kbd>Enter</kbd>!</p>
+        <p>
+            Try to type <code>print('hello world')</code> and hit <kbd>Enter</kbd>. This should come up on your screen:
+        </p>
+        <code>
+            Python 3.x.x (tags/v3.x.x:xxxxxx, mmm dd yyyy, hh:mm:ss [MSC v.xxxx 64 bit (AMD64)] on os<br />
+            Type "help", "copyright", "credits" or "license" for more information.<br />
+            >>> print('hello world')<br />
+            hello world
+        </code>
+        <p>Congratulations! You have executed your first line of code.</p>
     </section>
-    <section id="" class="main-section">
-        <header></header>
-        <p></p>
-        <code></code>
+    <section id="Variables" class="main-section">
+        <header>Variables</header>
+        <p>
+            You declare variables by typing the name of the variable, followed by equals, followed by its value. Let's
+            try to declare a number:
+        </p>
+        <code>
+            >>> hello_i_am_number = 69
+        </code>
+        <p>Now let's print that variable. This should be what you see:</p>
+        <code>
+            >>> print(hello_i_am_number)<br />
+            69
+        </code>
     </section>
-    <section id="" class="main-section">
-        <header></header>
-        <p></p>
-        <code></code>
+    <section id="Lorem" class="main-section">
+        <header>Lorem</header>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate deserunt eos eveniet, fugiat illo
+            ipsa laboriosam modi, nemo officia reiciendis saepe soluta totam voluptatum.
+        </p>
     </section>
 </main>
 </body>
