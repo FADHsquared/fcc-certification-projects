@@ -38,3 +38,17 @@ function spinalCase(str) {
   }
   return splittedString.join('').toLowerCase()
 }
+
+// Sum All Odd Fibonacci Numbers
+function sumFibs(num) {
+  const numArray = [1]
+  let acculNum = 1
+  for (let i = 1; numArray[i - 1] <= num; i++) {
+    numArray[i] = numArray[i - 1] + (numArray[i - 2] || 0)
+    if (numArray[i] % 2 === 1) acculNum += numArray[i]
+  }
+  acculNum -= numArray[numArray.length - 1]
+  numArray.pop()
+
+  return acculNum
+}
