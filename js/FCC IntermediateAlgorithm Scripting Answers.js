@@ -122,6 +122,19 @@ function sumPrimes(num) {
   return primeNums.reduce((prevVal, currVal) => prevVal + currVal, 0);
 }
 
+// Smallest Common Multiple
+function smallestCommons(arr) {
+  const [lowNumber, highNumber] = arr.sort((num1, num2) => num1 - num2);
+  const numRangeArray = [...Array(highNumber + 1).keys()].filter(
+    (num) => num >= lowNumber
+  );
+
+  for (let i = 1; true; i++) {
+    const currNumber = highNumber * i;
+    if (numRangeArray.every((num) => currNumber % num === 0)) return currNumber;
+  }
+}
+
 // Arguments Optional
 function addTogether(...nums) {
   if (nums.every((num) => typeof num === 'number')) {
