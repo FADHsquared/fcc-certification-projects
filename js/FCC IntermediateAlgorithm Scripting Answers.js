@@ -135,6 +135,22 @@ function smallestCommons(arr) {
   }
 }
 
+// Binary Agents
+function binaryAgent(str) {
+  return String.fromCharCode(
+    ...str.split(' ').map((binaryCharCode) =>
+      binaryCharCode
+        .split('')
+        .map((binaryDigit) => parseInt(binaryDigit))
+        .reduce(
+          (prevVal, currVal, idx) =>
+            prevVal + currVal * 2 ** (binaryCharCode.length - 1 - idx),
+          0
+        )
+    )
+  );
+}
+
 // Arguments Optional
 function addTogether(...nums) {
   if (nums.every((num) => typeof num === 'number')) {
