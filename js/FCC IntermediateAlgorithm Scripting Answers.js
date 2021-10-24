@@ -147,6 +147,19 @@ function dropElements(arr, func) {
   });
 }
 
+// Steamroller
+// Warning: this answer is hacky.
+function steamrollArray(arr) {
+  const mappings = [...Array(10).keys()].join().split(',');
+  return arr
+    .join()
+    .split(',')
+    .map((el) =>
+      el === '[object Object]' ? {} : el in mappings ? parseInt(el) : el
+    )
+    .filter((el) => el !== '');
+}
+
 // Binary Agents
 function binaryAgent(str) {
   return String.fromCharCode(
@@ -165,7 +178,10 @@ function binaryAgent(str) {
 
 // Everything Be True
 function truthCheck(collection, pre) {
-  return collection.reduce((prevVal, currVal) => prevVal && pre in currVal ? !!currVal[pre] : false, true);
+  return collection.reduce(
+    (prevVal, currVal) => (prevVal && pre in currVal ? !!currVal[pre] : false),
+    true
+  );
 }
 
 // Arguments Optional
@@ -209,8 +225,10 @@ function orbitalPeriod(arr) {
   const GM = 398600.4418;
   const earthRadius = 6367.4447;
 
-  return arr.map(debris => ({
+  return arr.map((debris) => ({
     name: debris.name,
-    orbitalPeriod: Math.round(2 * Math.PI * Math.sqrt((debris.avgAlt + earthRadius) ** 3 / GM))
+    orbitalPeriod: Math.round(
+      2 * Math.PI * Math.sqrt((debris.avgAlt + earthRadius) ** 3 / GM)
+    ),
   }));
 }
