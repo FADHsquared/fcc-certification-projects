@@ -135,6 +135,18 @@ function smallestCommons(arr) {
   }
 }
 
+// Drop it
+function dropElements(arr, func) {
+  let conditionMet = false;
+  return arr.filter((num) => {
+    if (conditionMet) return true;
+    if (func(num)) {
+      conditionMet = true;
+      return true;
+    }
+  });
+}
+
 // Binary Agents
 function binaryAgent(str) {
   return String.fromCharCode(
@@ -149,6 +161,11 @@ function binaryAgent(str) {
         )
     )
   );
+}
+
+// Everything Be True
+function truthCheck(collection, pre) {
+  return collection.reduce((prevVal, currVal) => prevVal && pre in currVal ? !!currVal[pre] : false, true);
 }
 
 // Arguments Optional
@@ -186,3 +203,14 @@ let Person = function (firstAndLast) {
     [firstName, lastName] = firstAndLast.split(' ');
   };
 };
+
+// Map the Debris
+function orbitalPeriod(arr) {
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
+
+  return arr.map(debris => ({
+    name: debris.name,
+    orbitalPeriod: Math.round(2 * Math.PI * Math.sqrt((debris.avgAlt + earthRadius) ** 3 / GM))
+  }));
+}
