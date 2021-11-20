@@ -1,7 +1,6 @@
 // Palindrome Checker
 function palindrome(str) {
-  const arrToCheck = str.toLowerCase().replace(/[^a-z0-9]/g, '').split('')
-  return arrToCheck.every((letter, idx) => letter === arrToCheck[arrToCheck.length - idx - 1]);
+  return str.toLowerCase().replace(/[^a-z0-9]/g, '').split('').every((letter, idx, arrToCheck) => letter === arrToCheck[arrToCheck.length - idx - 1]);
 }
 
 // Caesars Cipher
