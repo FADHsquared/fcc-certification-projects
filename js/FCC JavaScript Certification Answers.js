@@ -5,22 +5,8 @@ function palindrome(str) {
 
 // Caesars Cipher
 function rot13(str) {
-    const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  
-    let decipherString = ''
-    for (let i = 0; i < str.length; i++) {
-      const indexInAlphabet = alphabets.indexOf(str[i])
-      if (indexInAlphabet > 12) {
-        decipherString += alphabets[indexInAlphabet - 13]
-      } else if (indexInAlphabet === -1) {
-        decipherString += str[i]
-      } else {
-        decipherString += alphabets[indexInAlphabet + 13]
-      }
-    }
-  
-    return decipherString;
-  }
+  return str.split('').map((char) => /\W/.test(char) ? char : char.charCodeAt(0)-13 < 65 ? String.fromCharCode(char.charCodeAt(0) + 26 - 13) : String.fromCharCode(char.charCodeAt(0) - 13)).join('')
+}
 
 // Telephone Number Validator (I-don't-even-understand-what-I-wrote edition)
 function telephoneCheck(str) {
