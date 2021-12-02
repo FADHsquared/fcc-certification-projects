@@ -116,26 +116,24 @@ function checkCashRegister(price, cash, cid) {
 
   let change = cash - price;
 
-  const changeList = [
-    ...cid.map(([unit, amount], idx) => {
-      if (change < map[unit]) return [unit, 0];
+  const changeList = cid.map(([unit, amount], idx) => {
+    if (change < map[unit]) return [unit, 0];
 
-      const unitAmount =
-        change < amount
-          ? Math.floor(change / map[unit])
-          : Math.floor(amount / map[unit]);
-      const amountToDeduce = unitAmount * map[unit];
+    const unitAmount =
+      change < amount
+        ? Math.floor(change / map[unit])
+        : Math.floor(amount / map[unit]);
+    const amountToSubtract = unitAmount * map[unit];
 
-      change -= amountToDeduce;
-      cid[idx][1] -= amountToDeduce;
+    change = (change - amountToSubtract).toPrecision(15);
+    cid[idx][1] = (amount - amountToSubtract).toPrecision(15);
 
-      return [unit, amountToDeduce];
-    }),
-  ].reverse();
+    return [unit, amountToSubtract];
+  });
 
   const drawerHasMoney = cid
     .map(([_, amount]) => amount)
-    .every((moneyVal) => moneyVal > 0);
+    .some((moneyVal) => moneyVal > 0);
 
   const status =
     change != 0 ? 'INSUFFICIENT_FUNDS' : drawerHasMoney ? 'OPEN' : 'CLOSED';
@@ -146,10 +144,9 @@ function checkCashRegister(price, cash, cid) {
       status === 'INSUFFICIENT_FUNDS'
         ? []
         : status === 'CLOSED'
-        ? changeList
+        ? [...changeList].reverse()
         : changeList.filter(([_, amount]) => amount > 0),
   };
 
-  console.log(returnObj);
   return returnObj;
 }
