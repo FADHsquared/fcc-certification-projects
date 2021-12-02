@@ -96,3 +96,60 @@ function telephoneCheck(str) {
   if (numbersCount === 10 && hyphenCount <= 2) return true;
   return false;
 }
+
+// Cash Register
+function checkCashRegister(price, cash, cid) {
+  // NOTE: CID mutation
+  cid.reverse();
+
+  const map = {
+    'ONE HUNDRED': 100,
+    TWENTY: 20,
+    TEN: 10,
+    FIVE: 5,
+    ONE: 1,
+    QUARTER: 0.25,
+    DIME: 0.1,
+    NICKEL: 0.05,
+    PENNY: 0.01,
+  };
+
+  let change = cash - price;
+
+  const changeList = [
+    ...cid.map(([unit, amount], idx) => {
+      if (change < map[unit]) return [unit, 0];
+
+      const unitAmount =
+        change < amount
+          ? Math.floor(change / map[unit])
+          : Math.floor(amount / map[unit]);
+      const amountToDeduce = unitAmount * map[unit];
+
+      change -= amountToDeduce;
+      cid[idx][1] -= amountToDeduce;
+
+      return [unit, amountToDeduce];
+    }),
+  ].reverse();
+
+  const drawerHasMoney = cid
+    .map(([_, amount]) => amount)
+    .every((moneyVal) => moneyVal > 0);
+
+  const status =
+    change != 0 ? 'INSUFFICIENT_FUNDS' : drawerHasMoney ? 'OPEN' : 'CLOSED';
+
+  const returnObj = {
+    status,
+    change:
+      status === 'INSUFFICIENT_FUNDS'
+        ? []
+        : status === 'CLOSED'
+        ? changeList
+        : changeList.filter(([_, amount]) => amount > 0),
+  };
+
+  console.log(returnObj);
+  return returnObj;
+}
