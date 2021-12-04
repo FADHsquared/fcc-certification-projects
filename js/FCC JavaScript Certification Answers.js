@@ -148,17 +148,15 @@ function checkCashRegister(price, cash, cid) {
     .some((moneyVal) => moneyVal > 0);
 
   const status =
-    change != 0 ? 'INSUFFICIENT_FUNDS' : drawerHasMoney ? 'OPEN' : 'CLOSED';
+    change > 0 ? 'INSUFFICIENT_FUNDS' : drawerHasMoney ? 'OPEN' : 'CLOSED';
 
-  const returnObj = {
+  return {
     status,
     change:
       status === 'INSUFFICIENT_FUNDS'
         ? []
         : status === 'CLOSED'
-        ? [...changeList].reverse()
-        : changeList.filter(([_, amount]) => amount > 0),
+          ? [...changeList].reverse()
+          : changeList.filter(([_, amount]) => amount > 0),
   };
-
-  return returnObj;
 }
