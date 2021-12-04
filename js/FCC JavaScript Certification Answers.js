@@ -97,6 +97,18 @@ function telephoneCheck(str) {
   return false;
 }
 
+// Telephone Number Validator (proper version)
+function telephoneCheck(str) {
+  return /^(1 ?)?((\([0-9]{3}\) ?|[0-9]{3}-)[0-9]{3}-|(\([0-9]{3}\) ?|[0-9]{3} ?)[0-9]{3} ?)[0-9]{4}$/
+    .test(str);
+}
+
+// Telephone Number Validator (mixed hyphens and spaces allowed)
+function telephoneCheck(str) {
+  return /^(1 ?)?(\([0-9]{3}\) ?|[0-9]{3}[- ]?)[0-9]{3}[- ]?[0-9]{4}$/
+    .test(str);
+}
+
 // Cash Register
 function checkCashRegister(price, cash, cid) {
   // NOTE: CID mutation
