@@ -99,14 +99,16 @@ function telephoneCheck(str) {
 
 // Telephone Number Validator (proper version)
 function telephoneCheck(str) {
-  return /^(1 ?)?((\([0-9]{3}\) ?|[0-9]{3}-)[0-9]{3}-|(\([0-9]{3}\) ?|[0-9]{3} ?)[0-9]{3} ?)[0-9]{4}$/
-    .test(str);
+  return /^(1 ?)?((\([0-9]{3}\) ?|[0-9]{3}-)[0-9]{3}-|(\([0-9]{3}\) ?|[0-9]{3} ?)[0-9]{3} ?)[0-9]{4}$/.test(
+    str
+  );
 }
 
 // Telephone Number Validator (mixed hyphens and spaces allowed)
 function telephoneCheck(str) {
-  return /^(1 ?)?(\([0-9]{3}\) ?|[0-9]{3}[- ]?)[0-9]{3}[- ]?[0-9]{4}$/
-    .test(str);
+  return /^(1 ?)?(\([0-9]{3}\) ?|[0-9]{3}[- ]?)[0-9]{3}[- ]?[0-9]{4}$/.test(
+    str
+  );
 }
 
 // Cash Register
@@ -137,15 +139,17 @@ function checkCashRegister(price, cash, cid) {
         : Math.floor(amount / map[unit]);
     const amountToSubtract = unitAmount * map[unit];
 
-    change = (change - amountToSubtract).toPrecision(15);
-    cid[idx][1] = (amount - amountToSubtract).toPrecision(15);
+    change = Number((change - amountToSubtract).toPrecision(15));
 
     return [unit, amountToSubtract];
   });
 
   const drawerHasMoney = cid
     .map(([_, amount]) => amount)
-    .some((moneyVal) => moneyVal > 0);
+    .some(
+      (moneyVal, idx) =>
+        Number((moneyVal - changeList[idx][1]).toPrecision(15)) > 0
+    );
 
   const status =
     change > 0 ? 'INSUFFICIENT_FUNDS' : drawerHasMoney ? 'OPEN' : 'CLOSED';
