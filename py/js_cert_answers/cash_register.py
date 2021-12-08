@@ -35,7 +35,7 @@ def check_cash_register(price: Decimal, cash: Decimal, cid: list[tuple[str, Deci
     change_list = list(map(change_list_map_fn, enumerate(cid_reversed)))
 
     drawer_has_money = any(
-        amount > 0 for amount in map(lambda money: money[1], cid_reversed)
+        amount > 0 for amount in (money[1] for money in cid_reversed)
     )
 
     status = (
