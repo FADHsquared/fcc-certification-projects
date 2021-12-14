@@ -63,6 +63,6 @@ const sayNumberInEnglish = (n /* ADD MORE PARAMETERS IF NEEDED */) => {
   return theString
     .replace(/ty +/g, 'ty-')
     .replace(/-$/, '')
-    .replace(/ +/, ' ')
+    .replace(/ +/g, ' ')
     .trim();
 };
