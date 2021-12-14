@@ -1,4 +1,5 @@
-const sayNumberInEnglish = (n) => {
+/** @param {number} n */
+function sayNumberInEnglish(n) {
   if (n < 0 || n > 9999999999999) {
     console.error('Number out of range');
     return;
@@ -65,4 +66,4 @@ const sayNumberInEnglish = (n) => {
     });
 
   return theString.trim().replace(/ty +/g, 'ty-');
-};
+}
