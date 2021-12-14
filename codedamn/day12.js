@@ -1,5 +1,4 @@
-const sayNumberInEnglish = (n /* ADD MORE PARAMETERS IF NEEDED */) => {
-  // Write your solution here
+const sayNumberInEnglish = (n) => {
   if (n < 0 || n > 9999999999999) {
     console.error('Number out of range');
     return;
@@ -46,10 +45,13 @@ const sayNumberInEnglish = (n /* ADD MORE PARAMETERS IF NEEDED */) => {
   let tempNumber = n;
   let theString = '';
 
+  // Object.keys(map) returns the numbers in ascending order (1, 2, 3, 4, ...)
+  // for some reason, so we're reversing the array again
+  // It also returns the numbers as strings, wth?
   Object.keys(map)
     .reverse()
     .map((numStr) => parseInt(numStr))
-    .forEach((num, idx) => {
+    .forEach((num) => {
       if (num <= tempNumber) {
         const subtractTimes = Math.floor(tempNumber / num);
 
