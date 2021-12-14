@@ -54,15 +54,13 @@ const sayNumberInEnglish = (n /* ADD MORE PARAMETERS IF NEEDED */) => {
         const subtractTimes = Math.floor(tempNumber / num);
 
         theString += `${
-          !useOnePrefix.includes(num) ? '' : sayNumberInEnglish(subtractTimes)
-        } ${map[num]} `;
+          !useOnePrefix.includes(num)
+            ? ''
+            : `${sayNumberInEnglish(subtractTimes)} `
+        }${map[num]} `;
         tempNumber -= num * subtractTimes;
       }
     });
 
-  return theString
-    .replace(/ty +/g, 'ty-')
-    .replace(/-$/, '')
-    .replace(/ +/g, ' ')
-    .trim();
+  return theString.trim().replace(/ty +/g, 'ty-');
 };
