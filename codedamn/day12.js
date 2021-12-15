@@ -64,5 +64,5 @@ const sayNumberInEnglish = (n) => {
       }
     });
 
-  return theString.trim().replace(/ty +/g, 'ty-');
+  return theString.trim().replace(/ty +(?!thousand|million|billion)/g, 'ty-');
 };
