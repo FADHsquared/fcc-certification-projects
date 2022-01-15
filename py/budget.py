@@ -4,24 +4,38 @@ from decimal import Decimal
 
 
 class CashOperation(TypedDict):
-    amount: Decimal
+    amount: float
     description: str
 
 
-class Category:
-    ledger: list[CashOperation] = []
+class CategorySpending(TypedDict):
     name: str
+    total_spent: float
 
+
+class Category:
     def __init__(self, name: str):
         self.name = name
+        self.ledger: list[CashOperation] = []
 
     def __str__(self):
-        return f"{self.name}: {self.ledger}"
+        header = f"{self.name:*^30}"
 
-    def deposit(self, amount: float, description: str) -> None:
-        self.ledger.append({"amount": Decimal(str(amount)), "description": description})
+        entries = map(
+            lambda entry: f"{entry['description']:23.23}{entry['amount']:7.2f}",
+            self.ledger,
+        )
 
-    def withdraw(self, amount: float, description: str) -> bool:
+        footer = f"Total: {self.get_balance():.2f}"
+
+        return "\n".join((header, *entries, footer))
+
+    def deposit(self, amount: float, description: str = "") -> None:
+        self.ledger.append(
+            {"amount": float(Decimal(str(amount))), "description": description}
+        )
+
+    def withdraw(self, amount: float, description: str = "") -> bool:
         if self.check_funds(amount):
             self.deposit(0 - amount, description)
             return True
@@ -41,14 +55,48 @@ class Category:
 
 
 def create_spend_chart(categories: list[Category]):
-    pass
+    category_spendings: list[CategorySpending] = []
+    for category in categories:
+        category_spendings.append({
+            "name": category.name,
+            "total_spent": abs(sum(entry["amount"] for entry in category.ledger if entry["amount"] < 0))
+        })
+
+    aggregate_spending = sum(spending["total_spent"] for spending in category_spendings)
+
+    header = "Percentage spent by category"
+
+    chart_body_rows: list[str] = []
+    for percentage in range(100, -1, -10):
+        chart_body_rows.append(
+            f"{percentage:3}| {'  '.join('o' if (spending['total_spent'] / aggregate_spending * 100) >= percentage else ' ' for spending in category_spendings)}  "
+        )
+
+    limiter = f"    {'---' * len(category_spendings)}-"
+
+    caption_rows: list[str] = []
+    for idx in range(max(len(spending["name"]) for spending in category_spendings)):
+        caption_rows.append(
+            f"     {'  '.join(spending['name'][idx] if len(spending['name']) > idx else ' ' for spending in category_spendings)}  "
+        )
+
+    return "\n".join((header, *chart_body_rows, limiter, *caption_rows))
 
 
 def main():
-    new_cat = Category("Food")
-    new_cat.deposit(69.69, "initial deposit")
-    new_cat.deposit(619.69, "initial deposit")
-    print(new_cat)
+    food = Category("Food")
+    entertainment = Category("Entertainment")
+    business = Category("Business")
+
+    food.deposit(900, "deposit")
+    entertainment.deposit(900, "deposit")
+    business.deposit(900, "deposit")
+
+    food.withdraw(105.55)
+    entertainment.withdraw(33.40)
+    business.withdraw(10.99)
+
+    print(create_spend_chart([business, food, entertainment]))
 
 
 if __name__ == "__main__":
